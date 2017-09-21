@@ -8,6 +8,8 @@ import (
 "time"
 )
 
+const api_url string = "https://bittrex.com/api/v1.1/public/getticker?market="
+
 type ApiResponse struct {
 	Success  bool
 	Message  string
@@ -20,8 +22,8 @@ type ResponseResultType struct {
 	Last   float64
 }
 
-func check_currency(currency string, m map[string]float64) {
-	resp, err := http.Get("https://bittrex.com/api/v1.1/public/getticker?market="+currency)
+func CheckCurrency(currency string, m map[string]float64) {
+	resp, err := http.Get(api_url+currency)
 	if err != nil {
 		// handle error
 	}
@@ -55,7 +57,7 @@ func main() {
 		if i == len(args) {
 			i = 0
 		}
-		go check_currency(args[i], m) // no time shifts here
+		go CheckCurrency(args[i], m) // no time shifts here
 		time.Sleep(delay)
 	}
 }
