@@ -37,6 +37,7 @@ func CheckCurrency(currency string, m map[string]float64) {
 	json.Unmarshal(body, &response)
     // compare with old value
 	if response.Result.Last != m[currency]{
+		fmt.Print(time.Now().Format("15:04:05.99 "))
 		fmt.Print(currency)
 		fmt.Printf(" Last = %.8f", response.Result.Last)
 		fmt.Printf(" was = %.8f\n", m[currency])
