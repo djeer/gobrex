@@ -13,11 +13,13 @@ func main() {
 	var m map[string]float64
 	m = make(map[string]float64)
 	// start an endless loop
-	for i := 0;; i++ {
-		if i == len(args) {
-			i = 0
+	for {
+	    for i := 0;; i++ {
+		    if i == len(args) {
+			    break
+		    }
+		go lib.CheckCurrency(&args[i], m)
 		}
-		go lib.CheckCurrency(&args[i], m) // no time shifts here
-		time.Sleep(delay)
+		time.Sleep(delay)  // no time shifts here
 	}
 }
